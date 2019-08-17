@@ -1,0 +1,5 @@
+ASCII =  107 104 97 108 105 108 10
+Base64 = a2hhbGlsCg==
+HEX = ...SOON
+CESAR = NKDOLO 
+MORSE =-.- .... .- .-.. .. .-.. 
