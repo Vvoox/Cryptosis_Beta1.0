@@ -1,0 +1,5 @@
+#!C:\Users\yama-\Desktop\My_Cryptosis\venv\Scripts\python.exe
+from cx_Freeze.setupwriter import main
+
+main()
+

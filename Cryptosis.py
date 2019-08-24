@@ -171,12 +171,12 @@ def Share():
 
 
 CODE=['A','.-', 'B','-...',
-   'C''-.-.', 'D','-..', 'E','.',
+   'C','-.-.','D','-..',
    'F' , '..-.', 'G' , '--.', 'H','....',
    'I' ,'..', 'J','.---', 'K','-.-',
    'L' ,'.-..', 'M','--', 'N','-.',
    'O' ,'---', 'P' , '.--.', 'Q','--.-',
-   'R','.-.' , 'S','...', 'T','-',
+   'R','.-.' , 'S' ,'...', 'T','-',
    'U' ,'..-' , 'V','...-', 'W','.--',
    'X' ,'-..-' , 'Y','-.--', 'Z','--..',
    '1' ,'.----' , '2','..---', '3','...--',
@@ -185,7 +185,7 @@ CODE=['A','.-', 'B','-...',
    '0' ,'-----' , ', ' , '--..--' , '.' , '.-.-.-' ,
    '?' , '..--..' , '/' , '-..-.' , '-', '-....-',
    '(' , '-.--.' ,  ')' , '-.--.-']
-
+CODE1=[ 'E' ,'.', ]
 
 
 def Crypt():
@@ -277,10 +277,15 @@ def Crypt():
     #while(i<n):
             ##i+=1
     for i in range(n):
-        for j in range(m):
-            input1=input1.upper()
-            if input1[i]==CODE[j]:
-                 output_morse += CODE[j+1]+" "
+        if input1[i]=='E':
+            output_morse+=CODE1[1]+" "
+        else :
+            for j in range(m) :
+                input1 = input1.upper()
+                if input1[i] == CODE[j] :
+                    output_morse += CODE[j + 1] + " "
+
+
 
 
   # output += output_morse
@@ -383,10 +388,43 @@ def Cesar():
             for line in output :
                 f1.write(line)
     except:
-        MsgBox = messagebox.showinfo('Notification', 'Nothing Found',icon='info')
+        return morse()
+
+def morse():
+    try:
+        output_morse = ""
+        input1 = text.get("1.0", END)
+        n = len(input1)
+        m = len(CODE)
+        i = 0
+        # while(i<n):
+        ##i+=1
+        print(input1)
+        x = input1.split()
+        xx = len(x)
+        print(x)
+        for i in range(xx) :
+            if x[i]=='.':
+                output_morse+=CODE1[0]
+            else :
+                for j in range(m) :
+                    if x[i] == CODE[j] :
+                        output_morse += CODE[j - 1]
 
 
-#Menu----------------------------------------------------------------------------------------------
+        text1.delete('1.0', END)
+        output = "Morse to Plaintext =  " + output_morse
+        text1.insert(INSERT, output)
+        with open("output.txt", "w") as f1 :
+            for line in output :
+                f1.write(line)
+    except:
+        output_morse="Nothing found"
+
+
+
+
+    #Menu----------------------------------------------------------------------------------------------
 
 menu.add_cascade(label='File', menu=filemenu)
 filemenu.add_command(label='Open',command=set_filename)
@@ -425,7 +463,7 @@ canvas1.create_window(width/1.6, height/2.55, window=button2)
 button3 = Button(root, text='  Crypt  ', command=Crypt)
 canvas1.create_window(width/1.6, height/2.35, window=button3)
 
-button4 = Button(root, text='  Decrypt  ', command=Decrypt )
+button4 = Button(root, text='  Decrypt  ', command=morse )
 canvas1.create_window(width/1.6, height/2.15, window=button4)
 
 button1 = Button(root, text='  EXIT  ', command=ExitApplication )

@@ -1,5 +1,5 @@
-ASCII =  107 104 97 108 105 108 10
-Base64 = a2hhbGlsCg==
+ASCII =  73 110 115 101 114 116 32 121 111 117 114 32 116 101 120 116 32 104 101 114 101 46 46 46 111 114 32 98 114 111 119 115 101 32 121 111 117 114 32 102 105 108 101 10
+Base64 = SW5zZXJ0IHlvdXIgdGV4dCBoZXJlLi4ub3IgYnJvd3NlIHlvdXIgZmlsZQo=
 HEX = ...SOON
-CESAR = NKDOLO 
-MORSE =-.- .... .- .-.. .. .-.. 
+CESAR = LQVHUW BRXU WHAW KHUHRU EURZVH BRXU ILOH 
+MORSE =.. -. ... . .-. - -.-- --- ..- .-. - . -..- - .... . .-. . F .-.-.- F .-.-.- F .-.-.- --- .-. -... .-. --- .-- ... . -.-- --- ..- .-. ..-. .. .-.. . 
