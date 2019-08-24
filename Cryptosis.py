@@ -182,11 +182,14 @@ CODE=['A','.-', 'B','-...',
    '1' ,'.----' , '2','..---', '3','...--',
    '4' ,'....-' , '5','.....', '6','-....',
    '7' ,'--...' , '8','---..', '9','----.',
-   '0' ,'-----' , ', ' , '--..--' , '.' , '.-.-.-' ,
-   '?' , '..--..' , '/' , '-..-.' , '-', '-....-',
-   '(' , '-.--.' ,  ')' , '-.--.-']
-CODE1=[ 'E' ,'.', ]
-
+   '0' ,'-----' , ', ' , '--..--' ,
+   '?' , '..--..' ,
+   '(' , '-.--.' ,  ')' , '-.--.-' ]
+CODE1=[ 'E' ,'.' ]
+CODE2=['-', '-....-']
+CODE3=[' ','/']
+CODE4=['.' , '.-.-.-' ]
+CODE5=['/' , '-..-.']
 
 def Crypt():
 
@@ -248,18 +251,18 @@ def Crypt():
                 else :
                     X=25-j
                     Y=key-X
-                    output_cesar += Alphabet1[Y]
+                    output_cesar += Alphabet1[Y-1]
 
 
             if input1[i]==Alphabet2[j]:
 
                 if j + key <= 25 :
 
-                    output_cesar += Alphabet1[j + key]
+                    output_cesar += Alphabet1[j + key-1]
                 else :
                     X = 25 - j
                     Y = key - X -1
-                    output_cesar += Alphabet1[Y]
+                    output_cesar += Alphabet1[Y-1]
 
             if input1[i]==numbers[j]:
                 output_cesar+=numbers[j]
@@ -279,11 +282,19 @@ def Crypt():
     for i in range(n):
         if input1[i]=='E':
             output_morse+=CODE1[1]+" "
+        if input1[i]=='-':
+            output_morse += CODE2[1]+" "
+        if input1[i]==' ':
+            output_morse+= CODE3[1]+" "
+        if input1[i]=='.':
+            output_morse+=CODE4[1]+" "
+        if input1[i]=='/':
+            output_morse+=CODE5[1]+" "
         else :
             for j in range(m) :
                 input1 = input1.upper()
                 if input1[i] == CODE[j] :
-                    output_morse += CODE[j + 1] + " "
+                    output_morse += CODE[j + 1]+" "
 
 
 
@@ -337,89 +348,89 @@ def Base64():
         return Cesar()
 
 def Cesar():
+    input1 = text.get("1.0", END)
+    Alphabet1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    Alphabet2 = "abcdefghijklmnopqrstuvwxyz"
+    numbers = "1234567890/~!#$%^&*(()_+}{?><|\-.,][="
 
-    try:
-        input1 = text.get("1.0", END)
-        Alphabet1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        Alphabet2 = "abcdefghijklmnopqrstuvwxyz"
-        numbers = "1234567890/~!#$%^&*(()_+}{?><|\-.,][="
+    # key = int(input("Enter your key : "))
+    key = 3
 
-        # key = int(input("Enter your key : "))
-        key = 3
+    n = len(input1)
+    m = len(Alphabet1)
+    l = len(numbers)
+    output_cesar = ""
 
-        n = len(input1)
-        m = len(Alphabet1)
-        l = len(numbers)
-        output_cesar = ""
+    for i in range(n) :
 
-        for i in range(n) :
+        if input1[i] == " " :
+            output_cesar += " "
 
-            if input1[i] == " " :
-                output_cesar += " "
+        if input1[i] == "\n" :
+            output_cesar += " "
 
-            if input1[i] == "\n" :
-                output_cesar += " "
+        for j in range(m) :
 
+            if input1[i] == Alphabet1[j] :
+
+                if j + key >= 0 :
+                    output_cesar += Alphabet1[j - key]
+                else :
+                    X = 25 - j
+                    Y = key - X
+                    output_cesar += Alphabet1[Y - 1]
+
+            if input1[i] == Alphabet2[j] :
+                if j + key >= 0 :
+                    output_cesar += Alphabet1[j - key - 1]
+                else :
+                    X = 25 - j
+                    Y = key - X - 1
+                    output_cesar += Alphabet1[Y - 1]
+
+            if input1[i] == numbers[j] :
+                output_cesar += numbers[j]
+    text1.delete('1.0', END)
+    output = "Cesar to Plaintext =  " + output_cesar +"\n"
+    text1.insert(INSERT, output)
+    with open("output.txt", "w") as f1 :
+        for line in output :
+            f1.write(line)
+
+    output_morse = ""
+    input1 = text.get("1.0", END)
+    n = len(input1)
+    m = len(CODE)
+    i = 0
+    # while(i<n):
+    ##i+=1
+    print(input1)
+    x = input1.split()
+    xx = len(x)
+    print(x)
+    for i in range(xx) :
+        if x[i] == '.' :
+            output_morse += CODE1[0]
+        if x[i] == '-....-' :
+            output_morse += CODE2[0]
+        if x[i] == '/' :
+            output_morse += CODE3[0]
+        if x[i] == '.-.-.-' :
+            output_morse += CODE4[0]
+        if x[i] == '-..-.' :
+            output_morse += CODE5[0]
+        else :
             for j in range(m) :
+                if x[i] == CODE[j] :
+                    output_morse += CODE[j - 1]
 
-                if input1[i] == Alphabet1[j] :
-
-                    if j + key >= 0 :
-                        output_cesar += Alphabet1[j - key + 1]
-                    else :
-                        X = 25 - j
-                        Y = key - X
-                        output_cesar += Alphabet1[Y + 1]
-
-                if input1[i] == Alphabet2[j] :
-                    if j + key >= 0 :
-                        output_cesar += Alphabet1[j - key + 1]
-                    else :
-                        X = 25 - j
-                        Y = key - X - 1
-                        output_cesar += Alphabet1[Y + 1]
-
-                if input1[i] == numbers[j] :
-                    output_cesar += numbers[j]
-        text1.delete('1.0', END)
-        output = "Cesar to Plaintext =  " + output_cesar
-        text1.insert(INSERT, output)
-        with open("output.txt", "w") as f1 :
-            for line in output :
-                f1.write(line)
-    except:
-        return morse()
-
-def morse():
-    try:
-        output_morse = ""
-        input1 = text.get("1.0", END)
-        n = len(input1)
-        m = len(CODE)
-        i = 0
-        # while(i<n):
-        ##i+=1
-        print(input1)
-        x = input1.split()
-        xx = len(x)
-        print(x)
-        for i in range(xx) :
-            if x[i]=='.':
-                output_morse+=CODE1[0]
-            else :
-                for j in range(m) :
-                    if x[i] == CODE[j] :
-                        output_morse += CODE[j - 1]
+    output = "Morse to Plaintext =  " + output_morse
+    text1.insert(INSERT, output)
+    with open("output.txt", "w") as f1 :
+        for line in output :
+            f1.write(line)
 
 
-        text1.delete('1.0', END)
-        output = "Morse to Plaintext =  " + output_morse
-        text1.insert(INSERT, output)
-        with open("output.txt", "w") as f1 :
-            for line in output :
-                f1.write(line)
-    except:
-        output_morse="Nothing found"
 
 
 
@@ -438,7 +449,7 @@ helpmenu.add_command(label='About us' , command=About_us)
 
 
 
-#----------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------------
 text1= Text(root, height=1, width=5)
 text1.insert(INSERT, "INPUT")
 canvas1.create_window(width/4.5, 400, window=text1)
@@ -454,7 +465,7 @@ text1.insert(INSERT, output)
 canvas1.create_window(width/2.6, height-400, window=text1)
 
 
-#Buttons-------------------------------------------------------------------------------------------
+#Buttons------------------------------------------------------------------------------------------------
 
 button2 = Button(root, text='   Browse  ', command=set_filename )
 canvas1.create_window(width/1.6, height/2.55, window=button2)
@@ -463,7 +474,7 @@ canvas1.create_window(width/1.6, height/2.55, window=button2)
 button3 = Button(root, text='  Crypt  ', command=Crypt)
 canvas1.create_window(width/1.6, height/2.35, window=button3)
 
-button4 = Button(root, text='  Decrypt  ', command=morse )
+button4 = Button(root, text='  Decrypt  ', command=Decrypt )
 canvas1.create_window(width/1.6, height/2.15, window=button4)
 
 button1 = Button(root, text='  EXIT  ', command=ExitApplication )
