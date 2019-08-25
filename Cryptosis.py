@@ -81,7 +81,7 @@ def Contact():
     whatever_you_do = "Welcome in our software Cryptosis , hopely is useful for you ," \
                       "if there's any question , please contact us in "
     new = 1
-    url = "https://www.crisis.com"
+    url = "https://www.crisi5.com"
 
     def openweb() :
         webbrowser.open(url, new=new)
@@ -435,18 +435,40 @@ def Cesar():
 
 
 
-    #Menu----------------------------------------------------------------------------------------------
+#Menu----------------------------------------------------------------------------------------------
 
-menu.add_cascade(label='File', menu=filemenu)
-filemenu.add_command(label='Open',command=set_filename)
-filemenu.add_command(label='Options',command=Options)
-filemenu.add_separator()
-filemenu.add_command(label='Exit', command=ExitApplication)
-helpmenu = Menu(menu)
-menu.add_cascade(label='Help', menu=helpmenu)
-helpmenu.add_command(label='Contact' ,command=Contact)
-helpmenu.add_command(label='About us' , command=About_us)
+menubar = Menu(root)
 
+# Adding File Menu and commands
+file = Menu(menubar, tearoff=0)
+menubar.add_cascade(label='File', menu=file)
+file.add_command(label='New File', command=None)
+file.add_command(label='Open...', command=set_filename)
+file.add_command(label='Save', command=None)
+file.add_separator()
+file.add_command(label='Exit', command=ExitApplication)
+
+# Adding Edit Menu and commands
+edit = Menu(menubar, tearoff=0)
+menubar.add_cascade(label='Edit', menu=edit)
+edit.add_command(label='Cut', command=Copy)
+edit.add_command(label='Copy', command=Copy)
+edit.add_command(label='Paste', command=Copy)
+edit.add_command(label='Select All', command=Copy)
+edit.add_separator()
+edit.add_command(label='Find...', command=None)
+edit.add_command(label='Find again', command=None)
+
+# Adding Help Menu
+help_ = Menu(menubar, tearoff=0)
+menubar.add_cascade(label='Help', menu=help_)
+help_.add_command(label='Help', command=Options)
+help_.add_command(label='Contact us', command=Contact)
+help_.add_separator()
+help_.add_command(label='About us', command=About_us)
+
+# display Menu
+root.config(menu=menubar)
 
 
 #------------------------------------------------------------------------------------------------------
